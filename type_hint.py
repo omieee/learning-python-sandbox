@@ -40,17 +40,22 @@ def square_list(alist):
     return return_list
 
 print(square_list([1,2,3]))
-print(square_list("alpha"))#This will throw error. it's not user fault it's eng. fault
+# print(square_list("alpha"))
+# This will throw error. it's not user fault it's eng. fault
 
+#To enforce type hinting we can write it like below
+def square_numbers(numbers: list[int]) -> list[int]:
+    squared_numbers = []
 
-def square_list_by_a_senior_eng(alist: list[int]) -> list[int]:
-    return_list = []
-    for i in alist:
-        return_list.append(i ** 2)
-    return return_list
+    for number in numbers:
+        squared_numbers.append(number ** 2)
 
-print(square_list_by_a_senior_eng([1,2,3]))
-print(square_list_by_a_senior_eng("alpha"))#This will throw error, string is not a list[int]
+    return squared_numbers
+
+print(square_numbers([1,2,3]))
+# print(square_numbers("alpha"))
+# Runtime error happens because the function tries to square string characters.
+# Python does not enforce list[int] at runtime.
 
 
 def greet_user(name: str) -> str:
