@@ -22,7 +22,25 @@ class Tx:
             )
 
 
-if __name__ == "main":
+class NewTx:
+    def __init__(self, swallow: bool = False) -> None:
+        self.events = []
+        self.swallow = swallow
+
+    def __enter__(self):
+        self.events.append("BEGIN")
+        print("We started..")
+        return self.events
+
+    def __exit__(self, exc_type, exc, tb):
+        if exc:
+            self.events.append("ROLLBACK")
+        else:
+            self.events.append("COMMIT")
+        return self.swallow
+
+
+if __name__ == "__main__":
     with Tx("some-awesome-db") as tix:
         print(tix)  # will print the line as well as some-awesome-db is enabled
         print("-" * 40)  # will print this line
