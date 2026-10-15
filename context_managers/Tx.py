@@ -22,9 +22,12 @@ class Tx:
             )
 
 
-with Tx("some-awesome-db") as tix:
-    print(tix)  # will print the line as well as some-awesome-db is enabled
-    print("-" * 40)  # will print this line
-    tix[100]  # this will throw error as that string is not 100 character long
+if __name__ == "main":
+    with Tx("some-awesome-db") as tix:
+        print(tix)  # will print the line as well as some-awesome-db is enabled
+        print("-" * 40)  # will print this line
+        tix[100]  # this will throw error as that string is not 100 character long
 
-print("Hello World")  # beacuse set to false it will never run, program will crash early
+    print(
+        "Hello World"
+    )  # beacuse set to false it will never run, program will crash early
