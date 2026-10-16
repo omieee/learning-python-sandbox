@@ -2,7 +2,7 @@
 PYTHON ?= uv run python
 
 test:
-	${PYTHON} -m pytest
+	${PYTHON} -m pytest -v
 
 lint:
 	${PYTHON} -m ruff check .

@@ -10,15 +10,21 @@ def test_tx_functionality() -> None:
 
 def test_new_tx_no_error() -> None:
     with NewTx() as events:
-        print(events)
+        assert events == ["BEGIN"]
+        assert 1 == len(events)  # Till now it has not exited so only "BEGIN" is there
+    assert 2 == len(events)  # Now exited and __exit__ got executed
+    assert events == ["BEGIN", "COMMIT"]
 
 
 def test_new_tx_with_error() -> None:
     with pytest.raises(IndexError):
         with NewTx() as events:
-            print(events[10])
+            print(events[20000])
+            assert events == ["BEG"]  # you need to fix this, looks wrong to me
 
 
 def test_new_tx_error_swallow() -> None:
     with NewTx(swallow=True) as events:
-        print(events[10])
+        assert events == ["BEGIN"]
+        assert 1 == len(events)
+    assert events == ["BEGIN", "COMMIT"]
