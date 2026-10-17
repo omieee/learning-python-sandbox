@@ -19,12 +19,13 @@ def test_new_tx_no_error() -> None:
 def test_new_tx_with_error() -> None:
     with pytest.raises(IndexError):
         with NewTx() as events:
-            print(events[20000])
-            assert events == ["BEG"]  # you need to fix this, looks wrong to me
+            events[20000]  # THis will fail and trigger the IndexError
+    assert 2 == len(events)
+    assert events == ["BEGIN", "ROLLBACK"]
 
 
 def test_new_tx_error_swallow() -> None:
     with NewTx(swallow=True) as events:
-        assert events == ["BEGIN"]
-        assert 1 == len(events)
-    assert events == ["BEGIN", "COMMIT"]
+        events[20000]  # This will fail but won't trigger IndexError, hence can't catch
+    assert 2 == len(events)
+    assert events == ["BEGIN", "ROLLBACK"]

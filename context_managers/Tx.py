@@ -33,7 +33,7 @@ class NewTx:
         return self.events
 
     def __exit__(self, exc_type, exc, tb):
-        if exc:
+        if exc is not None:
             self.events.append("ROLLBACK")
         else:
             self.events.append("COMMIT")
