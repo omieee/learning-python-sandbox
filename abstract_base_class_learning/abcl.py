@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod  # This is how you import for abstract base 
 
 class Shape(ABC):
     @abstractmethod
-    def area() -> int:
+    def area(self) -> int:
         pass
 
 
@@ -13,10 +13,9 @@ class Shape(ABC):
 
 
 class Square(Shape):
-    def __init__(self, length: int, bredth: int) -> None:
+    def __init__(self, side: int) -> None:
         super().__init__()
-        self.length = length
-        self.bredth = bredth
+        self.side = side
 
     def area(self):
-        return self.length * self.bredth
+        return self.side * 2
