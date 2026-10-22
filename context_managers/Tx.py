@@ -29,7 +29,7 @@ class NewTx:
 
     def __enter__(self):
         self.events.append("BEGIN")
-        print("We started..")
+        print("\nWe started..")
         return self.events
 
     def __exit__(self, exc_type, exc, tb):
