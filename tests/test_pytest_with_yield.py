@@ -13,3 +13,8 @@ def numbers():
 def test_sum(numbers):
     print("TEST: running")
     assert sum(numbers) == 6
+
+
+def test_append(numbers):
+    numbers.append(4)
+    assert len(numbers) == 4
